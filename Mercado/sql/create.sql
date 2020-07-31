@@ -1,0 +1,18 @@
+CREATE TABLE rack (
+    id BIGSERIAL NOT NULL,
+    name VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE product (
+    id BIGSERIAL NOT NULL,
+    barCode VARCHAR(13) NOT NULL,
+    name VARCHAR(20) NOT NULL,
+    id_rack BIGINT,
+    quantity BIGINT NOT NULL,
+    total BIGINT NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE (barCode)
+);
+
+ALTER TABLE product ADD CONSTRAINT FK_product_rack FOREIGN KEY (id_rack) REFERENCES rack(id) ON UPDATE CASCADE ON DELETE NO ACTION;
